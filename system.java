@@ -121,7 +121,7 @@ class signup extends JFrame {
 	}
 }
 
-
+//set appointment
 
 class appoint extends JFrame {
 	JTextField hour, minutes, pmOrAm, date;
@@ -216,8 +216,14 @@ class appoint extends JFrame {
     submit.setBounds(130, 390, 210, 40);
     submit.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog( null, "Appointment has been processed!" );
-				dispose();
+
+				if ((hour.getText().isEmpty()) && (minutes.getText().isEmpty()) && (pmOrAm.getText().isEmpty()) && (date.getText().isEmpty())) {
+					submit.setEnabled(false);
+				}
+				else {
+        	JOptionPane.showMessageDialog( null, "Appointment has been processed!" );
+					dispose();
+				}	
       }
     });
     cancel = new JButton("Cancel, go back");
@@ -249,6 +255,8 @@ class appoint extends JFrame {
 	}
 }
 
+// dashboard
+	
 class dashboard extends JFrame {
 	JButton patient, labs, branch, med, appoint, equipmentSupplies, doc, exit;
 	
@@ -345,6 +353,7 @@ class dashboard extends JFrame {
 	}
 }
 
+//log in
 
 class signin extends JFrame {
 	JTextField logInF, pass;
@@ -450,6 +459,8 @@ class signin extends JFrame {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 }
+
+//branches available in mm
 
 class branches extends JFrame {
 	JButton firstLocBtnRedirection, secondLocBtnRedirection, thirdLocBtnRedirection, fourthLocBtnRedirection, fifthLocBtnRedirection, sixthLocBtnRedirection, seventhLocBtnRedirection, eightLocBtnRedirection, ninthLocBtnRedirection, tenthLocBtnRedirection, eleventhLocBtnRedirection, backToDashboard;
@@ -652,6 +663,7 @@ class branches extends JFrame {
 	}
 }
 
+// equipment 
 
 class equipmentSupplies extends JFrame {
 	JLabel title, hospital, defibrillators, ecgMach, wheelchairs, beds, xray;
@@ -714,6 +726,8 @@ class equipmentSupplies extends JFrame {
 	}
 }
 
+
+// doctor ui
 
 class doc extends JFrame {
 	
@@ -884,63 +898,53 @@ class doc extends JFrame {
 	}
 }
 
+// patient form
+
 class patient extends JFrame {
+	JLabel pat, nameicon, ageicon, addicon, conticon, gendicon, emailicon;
+	JTextField nameField, ageField, addressField, contactField, sexField, emailField;
+	JButton submit, back;
 	String name, age, address, contact, sex, email;
 	
 	void patientInterface() {
-
-		setTitle("Hospital Managepat System");
-		JLabel pat = new JLabel("Patient");
+		pat = new JLabel("Patient");
 		pat.setBounds(210, 20, 500, 40);
 
-		JLabel nameicon = new JLabel("");
-		nameicon.setIcon(new ImageIcon(
-				new ImageIcon("images/name.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		nameicon = new JLabel("");
+		nameicon.setIcon(new ImageIcon(new ImageIcon("images/name.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		nameicon.setBounds(50, 10, 200, 200);
-		add(nameicon);
-
-		JLabel ageicon = new JLabel("");
-		ageicon.setIcon(new ImageIcon(
-				new ImageIcon("images/age.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		ageicon = new JLabel("");
+		ageicon.setIcon(new ImageIcon(new ImageIcon("images/age.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		ageicon.setBounds(50, 90, 200, 200);
-		add(ageicon);
 
-		JLabel addicon = new JLabel("");
+		addicon = new JLabel("");
 		addicon.setIcon(new ImageIcon(
 				new ImageIcon("images/address.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		addicon.setBounds(50, 170, 200, 200);
-		add(addicon);
-
-		JLabel conticon = new JLabel("");
+		
+		conticon = new JLabel("");
 		conticon.setIcon(new ImageIcon(
 				new ImageIcon("images/contact.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		conticon.setBounds(50, 250, 200, 200);
-		add(conticon);
-
-		JLabel gendicon = new JLabel("");
-		gendicon.setIcon(new ImageIcon(
-				new ImageIcon("images/gend.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		gendicon = new JLabel("");
+		gendicon.setIcon(new ImageIcon(new ImageIcon("images/gend.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		gendicon.setBounds(50, 330, 200, 200);
-		add(gendicon);
-
-		JLabel emailicon = new JLabel("");
-		emailicon.setIcon(new ImageIcon(
-				new ImageIcon("images/email.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
+		
+		emailicon = new JLabel("");
+		emailicon.setIcon(new ImageIcon(new ImageIcon("images/email.jpeg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
 		emailicon.setBounds(50, 400, 200, 200);
-		add(emailicon);
-
-		JTextField nameField = new JTextField("Name");
+		
+		nameField = new JTextField("Name");
 		nameField.setBounds(130, 90, 210, 40);
 		nameField.addFocusListener(new FocusListener() {
-			@Override
 			public void focusGained(FocusEvent e) {
 				if (nameField.getText().equals("Name")) {
 					nameField.setText("");
 					nameField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (nameField.getText().isEmpty()) {
 					nameField.setForeground(Color.GRAY);
@@ -949,18 +953,15 @@ class patient extends JFrame {
 			}
 		});
 
-		JTextField ageField = new JTextField("Age");
+		ageField = new JTextField("Age");
 		ageField.setBounds(130, 170, 210, 40);
 		ageField.addFocusListener(new FocusListener() {
-			@Override
 			public void focusGained(FocusEvent e) {
 				if (ageField.getText().equals("Age")) {
 					ageField.setText("");
 					ageField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (ageField.getText().isEmpty()) {
 					ageField.setForeground(Color.GRAY);
@@ -969,18 +970,15 @@ class patient extends JFrame {
 			}
 		});
 
-		JTextField addressField = new JTextField("Address");
+		addressField = new JTextField("Address");
 		addressField.setBounds(130, 250, 210, 40);
 		addressField.addFocusListener(new FocusListener() {
-			@Override
 			public void focusGained(FocusEvent e) {
 				if (addressField.getText().equals("Address")) {
 					addressField.setText("");
 					addressField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (addressField.getText().isEmpty()) {
 					addressField.setForeground(Color.GRAY);
@@ -989,18 +987,15 @@ class patient extends JFrame {
 			}
 		});
 
-		JTextField contactField = new JTextField("Contact");
+		contactField = new JTextField("Contact");
 		contactField.setBounds(130, 330, 210, 40);
 		contactField.addFocusListener(new FocusListener() {
-			@Override
 			public void focusGained(FocusEvent e) {
 				if (contactField.getText().equals("Contact")) {
 					contactField.setText("");
 					contactField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (contactField.getText().isEmpty()) {
 					contactField.setForeground(Color.GRAY);
@@ -1009,7 +1004,7 @@ class patient extends JFrame {
 			}
 		});
 
-		JTextField sexField = new JTextField("Sex");
+		sexField = new JTextField("Sex");
 		sexField.setBounds(130, 410, 210, 40);
 		sexField.addFocusListener(new FocusListener() {
 			@Override
@@ -1019,8 +1014,6 @@ class patient extends JFrame {
 					sexField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (sexField.getText().isEmpty()) {
 					sexField.setForeground(Color.GRAY);
@@ -1029,18 +1022,15 @@ class patient extends JFrame {
 			}
 		});
 
-		JTextField emailField = new JTextField("Email");
+		emailField = new JTextField("Email");
 		emailField.setBounds(130, 480, 210, 40);
 		emailField.addFocusListener(new FocusListener() {
-			@Override
 			public void focusGained(FocusEvent e) {
 				if (emailField.getText().equals("Email")) {
 					emailField.setText("");
 					emailField.setForeground(Color.BLACK);
 				}
 			}
-
-			@Override
 			public void focusLost(FocusEvent e) {
 				if (emailField.getText().isEmpty()) {
 					emailField.setForeground(Color.GRAY);
@@ -1048,10 +1038,10 @@ class patient extends JFrame {
 				}
 			}
 		});
-	JButton back = new JButton("Back");
+		
+		back = new JButton("Back");
 		back.setBounds(50, 580, 150, 40);
 		back.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				dashboard db = new dashboard();
@@ -1059,7 +1049,7 @@ class patient extends JFrame {
 			}
 		});
 
-		JButton submit = new JButton("Submit");
+		submit = new JButton("Submit");
 		submit.setBounds(250, 580, 150, 40);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1082,6 +1072,7 @@ class patient extends JFrame {
 				db.dashboardInterface();
 			}
 		});
+		
 		setLayout(null);
 		add(back);
 		add(pat);
@@ -1089,8 +1080,15 @@ class patient extends JFrame {
 		add(ageField);
 		add(addressField);
 		add(contactField);
+		add(nameicon);
 		add(sexField);
 		add(emailField);
+		add(ageicon);
+		add(conticon);
+		add(gendicon);
+		add(emailicon);
+		add(addicon);
+		setTitle("Hospital Managepat System");
 		add(submit);
 		setSize(500, 690);
 		setLocationRelativeTo(null);
@@ -1099,77 +1097,78 @@ class patient extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 }
+
+// meds
+
 class meds extends JFrame {
+	JLabel notice, medicineList, othert, noticeObgyn, paracetamol, antihistamine, antacids, hydrocortisoneCream, antisepticCream, antisepticSolution, painKiller, bandages, loperamide, centrum, loratadine, folicAcid, eyedrops, hexylresorcinol;
+	JButton back;
 
 	void medsInterface() {
-		setTitle("Hospital Management System");
-		JLabel medicineList = new JLabel("Available Drugs and Medicine");
+		medicineList = new JLabel("Available Drugs and Medicine");
 		medicineList.setBounds(150, 15, 210, 40);
 
-		JLabel notice = new JLabel("Notice: Please refer to our pharmacist for the prices for non-OTC medicine");
+		notice = new JLabel("Notice: Please refer to our pharmacist for the prices for non-OTC medicine");
 		notice.setBounds(20, 50, 500, 40);
 
-		JLabel othert = new JLabel("please give us the doctors prescription to prevent medicine misuse.");
+		othert = new JLabel("please give us the doctors prescription to prevent medicine misuse.");
 		othert.setBounds(20, 65, 400, 40);
 
-		JLabel noticeObgyn = new JLabel("Notice: Please refer to your obyn before buying contraception.");
+		noticeObgyn = new JLabel("Notice: Please refer to your obyn before buying contraception.");
 		noticeObgyn.setBounds(20, 90, 500, 40);
 
-		JLabel paracetamol = new JLabel("Paracetamol 500mg/Syrup/Suspension");
+		paracetamol = new JLabel("Paracetamol 500mg/Syrup/Suspension");
 		paracetamol.setBounds(20, 130, 225, 40);
 
-		JLabel antihistamine = new JLabel("Antihistamines 10/25mg");
+		antihistamine = new JLabel("Antihistamines 10/25mg");
 		antihistamine.setBounds(20, 160, 225, 40);
 
-		JLabel antacids = new JLabel("Antacids 40/250mg 10ml drops");
+		antacids = new JLabel("Antacids 40/250mg 10ml drops");
 		antacids.setBounds(20, 190, 225, 40);
 
-		JLabel hydrocortisoneCream = new JLabel("Hydrocortisone Cream 5/10/15g");
+		hydrocortisoneCream = new JLabel("Hydrocortisone Cream 5/10/15g");
 		hydrocortisoneCream.setBounds(20, 220, 225, 40);
 
-		JLabel antisepticCream = new JLabel("Antiseptic Cream 50/100g");
+		antisepticCream = new JLabel("Antiseptic Cream 50/100g");
 		antisepticCream.setBounds(20, 250, 225, 40);
 
-		JLabel antisepticSolution = new JLabel("Anti-Septic Solution 25/50ml");
+		antisepticSolution = new JLabel("Anti-Septic Solution 25/50ml");
 		antisepticSolution.setBounds(20, 280, 225, 40);
 
-		JLabel painKiller = new JLabel("Painkiller 60/120ml");
+		painKiller = new JLabel("Painkiller 60/120ml");
 		painKiller.setBounds(20, 310, 225, 40);
 
-		JLabel bandages = new JLabel("Bandages 4x6/4x10/3x5");
+		bandages = new JLabel("Bandages 4x6/4x10/3x5");
 		bandages.setBounds(20, 340, 225, 40);
 
-		JLabel loperamide = new JLabel("Loperamide 2mg only");
+		loperamide = new JLabel("Loperamide 2mg only");
 		loperamide.setBounds(20, 370, 225, 40);
 
-		JLabel centrum = new JLabel("Centrum Silver Advance 30 Tablets");
+		centrum = new JLabel("Centrum Silver Advance 30 Tablets");
 		centrum.setBounds(20, 400, 225, 40);
 
-		JLabel loratadine = new JLabel("Loratadine 10mg");
+		loratadine = new JLabel("Loratadine 10mg");
 		loratadine.setBounds(20, 430, 225, 40);
 
-		JLabel folicAcid = new JLabel("Folic Acid 300mg");
+		folicAcid = new JLabel("Folic Acid 300mg");
 		folicAcid.setBounds(20, 460, 225, 40);
 
-		JLabel eyedrops = new JLabel("EyeDrops 10m");
+		eyedrops = new JLabel("EyeDrops 10m");
 		eyedrops.setBounds(20, 490, 225, 40);
 
-		JLabel hexylresorcinol = new JLabel("Hexylresorcinol 2.4 mg");
+		hexylresorcinol = new JLabel("Hexylresorcinol 2.4 mg");
 		hexylresorcinol.setBounds(20, 520, 225, 40);
-
-		JButton ok = new JButton("OK");
-		ok.setBounds(270, 580, 150, 40);
 
 		JButton back = new JButton("Back");
 		back.setBounds(50, 580, 150, 40);
 		back.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				dashboard db = new dashboard();
 				db.dashboardInterface();
 				dispose();
 			}
 		});
+		
 		setLayout(null);
 		add(medicineList);
 		add(notice);
@@ -1187,6 +1186,7 @@ class meds extends JFrame {
 		add(centrum);
 		add(loratadine);
 		add(folicAcid);
+		setTitle("Hospital Management System");
 		add(eyedrops);
 		add(hexylresorcinol);
 		add(back);
@@ -1199,14 +1199,12 @@ class meds extends JFrame {
 	}
 }
 
-						
+// main args
 
 class system {
 	public static void main(String[] args) {
-		/*signin si = new signin();
+		signin si = new signin();
 		si.signinInterface();
-		si.setVisible(true);*/
-		branches bra = new branches();
-		bra.brInterface();
+		si.setVisible(true);
 	}
 }
