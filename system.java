@@ -84,7 +84,7 @@ class signup extends JFrame {
         if((desiredPassword.getText().equals(passwordAgain.getText())) && (desiredUser.getText() != (""))) {
 			 		try {
 						FileWriter inputs = new FileWriter("data/dataentry.txt", true);
-						inputs.write(desiredUser.getText() + "\t" + passwordAgain.getText() + "\n");
+						inputs.write(desiredUser.getText() + "\t" + desiredPassword.getText() + "\n");
 						inputs.close();
 						JOptionPane.showMessageDialog(null, "Account has been created!");
 						dispose();
@@ -362,7 +362,7 @@ class signin extends JFrame {
 	
 	void signinInterface() {
 		note = new JLabel("");
-		note.setBounds(0, 0, 0, 0);
+		note.setBounds(1, 1, 250, 70);
     usericon = new JLabel("");
     usericon.setIcon(new ImageIcon(new ImageIcon("images/login-user.jpg").getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT)));
     usericon.setBounds(130, 90, 190, 40);
@@ -389,38 +389,52 @@ class signin extends JFrame {
       }
     });
 
-    pass = new JTextField("Password");
+    pass = new JTextField("Password: ");
     pass.setBounds(180, 170, 160, 40);
     pass.setForeground(Color.BLACK);
+		pass.addFocusListener(new FocusListener() {
+      public void focusGained(FocusEvent e) {
+        if (pass.getText().equals("Password: ")) {
+          pass.setText("");
+          pass.setForeground(Color.BLACK);
+        }
+			}
+      public void focusLost(FocusEvent e) {
+        if (pass.getText().isEmpty()) {
+          pass.setForeground(Color.GRAY);
+          pass.setText("Password: ");
+        }
+      }
+    });
 
     signInBTN = new JButton("Login");
     signInBTN.setBounds(130, 250, 210, 40);
     signInBTN.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 				boolean isRegistered = false;
-				String uname = logInF.getText().toString();
-				String pw = pass.getText().toString();
-				String line;
+				String userNameF = logInF.getText().toString();
+				String pwd = pass.getText().toString();
 				dashboard db = new dashboard();
+
 				try {
-					FileReader inputread = new FileReader("data/dataentry.txt");
-					BufferedReader br = new BufferedReader(inputread);
-					while ((line = br.readLine()) != null) {
-						if(line.equals(uname + "/t" + pw)) {
-							isRegistered = true;
-							break;
-						}
-						inputread.close();
-						if (isRegistered) {
-							db.dashboardInterface();
-							dispose();
-						}
-						else {
-							note.setText("Incorrect usrname or password");
-						}
+				FileReader fr = new FileReader("data/dataentry.txt");
+				BufferedReader br = new BufferedReader(fr);
+				String line;
+				while((line = br.readLine()) != null) {
+					if (line.equals(userNameF + "\t" + pwd)) {
+						isRegistered = true;
+						break;
 					}
 				}
-				catch (Exception ex) {}
+				fr.close();
+				} catch(Exception a){}
+				if (isRegistered) {
+					dispose();
+					db.dashboardInterface();
+				}
+				else {
+					note.setText("Wrong password or username");
+				}
       }
     });
 
@@ -449,6 +463,7 @@ class signin extends JFrame {
 		add(usericon);
 		setTitle("Hospital Management System");
     add(signUpBTN);
+		add(note);
 		add(passicon);
     add(signInBTN);
     add(clear);
