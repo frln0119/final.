@@ -781,14 +781,14 @@ class doc extends JFrame {
     docThreeEmail = new JLabel("arron@gmail.com");
     docThreeEmail.setBounds(360, 240, 390, 40);
     docThreeEmail.setForeground(Color.red);
-   	docThreeContact = new JLabel("09451826478");
+		docThreeContact = new JLabel("09451826478");
     docThreeContact.setBounds(550, 240, 390, 40);
     docThreeSpec = new JLabel("Dermatology");
     docThreeSpec.setBounds(700, 240, 390, 40);
     docThreeRoom = new JLabel("Room 10");
     docThreeRoom.setBounds(860, 240, 390, 40);
 		
-   	docFourNo = new JLabel("4. ");
+		docFourNo = new JLabel("4. ");
     docFourNo.setBounds(20, 310, 390, 40);
     docFourLicense = new JLabel("012843");
     docFourLicense.setBounds(90, 310, 390, 40);
